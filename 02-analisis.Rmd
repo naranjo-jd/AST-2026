@@ -2,7 +2,7 @@
 
 En este capítulo realizamos un análisis exhaustivo de una variable de nuestro conjunto de datos de series de tiempo. Implementamos técnicas clave como promedios móviles, variables retardadas y descomposición estacional para entender patrones, tendencias y comportamientos cíclicos.
 
-## Preparación de Datos y Librerías
+## Preparación de Datos y Librerías {#sec:datos}
 
 ```{r setup-analysis, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -36,7 +36,7 @@ ts_data <- ts(datos$valor, start = 1, frequency = 7)
 head(datos)
 ```
 
-## 1. Análisis General de la Serie
+## 1. Análisis General de la Serie {#sec:analisis-general}
 
 ```{r summary-stats}
 # Estadísticas descriptivas
@@ -69,7 +69,7 @@ plot_original <- ggplot(datos, aes(x = fecha, y = valor)) +
 print(plot_original)
 ```
 
-## 2. Análisis de Promedios Móviles
+## 2. Análisis de Promedios Móviles {#sec:promedios-moviles}
 
 Los **promedios móviles** suavizan la serie eliminando ruido de corto plazo y revelando tendencias subyacentes. Calculamos múltiples ventanas para capturar patrones a diferentes escalas.
 
@@ -107,13 +107,13 @@ plot_ma <- ggplot(datos, aes(x = fecha)) +
 print(plot_ma)
 ```
 
-### Interpretación de Promedios Móviles
+### Interpretación de Promedios Móviles {#subsec:interpretacion-ma}
 
 - **MA(7)**: Captura patrones semanales cortos; sigue más de cerca la serie original.
 - **MA(14)**: Equilibrio entre suavidad y sensibilidad; útil para detección de cambios moderados.
 - **MA(30)**: Suavidad máxima; revela la tendencia general subyacente.
 
-## 3. Variables Retardadas
+## 3. Variables Retardadas {#sec:variables-retardadas}
 
 Las **variables retardadas** (lags) capturan dependencias autocorrelacionadas: cómo los valores pasados influyen en el presente. Examinamos lags de 1, 7 y 30 días.
 
@@ -160,7 +160,7 @@ lag_plot <- gridExtra::grid.arrange(plot_lag1, plot_lag7, plot_lag30, ncol = 3)
 print(lag_plot)
 ```
 
-### Función de Autocorrelación (ACF) y Autocorrelación Parcial (PACF)
+### Función de Autocorrelación (ACF) y Autocorrelación Parcial (PACF) {#subsec:acf-pacf}
 
 ```{r acf-pacf, fig.width=10, fig.height=5}
 # Gráficos de ACF y PACF
@@ -175,7 +175,7 @@ par(mfrow = c(1, 1))
 - Las correlaciones con **lag_7** destacan patrones semanales (si existen).
 - Las correlaciones con **lag_30** revelan dependencias mensuales o estacionales.
 
-## 4. Descomposición Estacional Aditiva
+## 4. Descomposición Estacional Aditiva {#sec:descomposicion}
 
 La **descomposición estacional** separa la serie en componentes: tendencia, estacionalidad y residuos. Utilizamos el método clásico aditivo, asumiendo que: $$Y_t = T_t + S_t + E_t$$
 
@@ -217,7 +217,7 @@ plot_decomp <- ggplot(decomp_df, aes(x = fecha, y = valor)) +
 print(plot_decomp)
 ```
 
-### Análisis de Componentes
+### Análisis de Componentes {#subsec:analisis-componentes}
 
 ```{r component-analysis}
 # Estadísticas de cada componente
@@ -262,9 +262,9 @@ variance_summary <- tibble(
 knitr::kable(variance_summary, caption = "Varianza Explicada por Cada Componente", digits = 2)
 ```
 
-## 5. Resumen e Insights
+## 5. Resumen e Insights {#sec:resumen}
 
-### Hallazgos Principales
+### Hallazgos Principales {#subsec:hallazgos}
 
 1. **Promedios Móviles**: La serie exhibe suavidad al aplicar MA(30), indicando una tendencia creciente clara con oscilaciones regulares.
 
@@ -275,13 +275,13 @@ knitr::kable(variance_summary, caption = "Varianza Explicada por Cada Componente
    - La **estacionalidad** contiene variaciones regulares, posiblemente con ciclos semanales y anuales.
    - Los **residuos** muestran variación aleatoria alrededor de cero, indicando que los componentes principales capturan bien la estructura de la serie.
 
-### Implicaciones para Modelado Futuro
+### Implicaciones para Modelado Futuro {#subsec:implicaciones}
 
 - **Modelos ARIMA**: Los patrones de ACF/PACF guían la selección de parámetros (p, d, q).
 - **Modelos Estacionales (SARIMA)**: La estacionalidad detectada justifica incluir términos estacionales.
 - **Métodos Avanzados**: Machine learning o deep learning podrían capturar relaciones no lineales en los residuos.
 
-### Próximos Pasos
+### Próximos Pasos {#subsec:proximos-pasos}
 
 Para investigación futura con datos reales:
 - Validar la estacionalidad con pruebas estadísticas (Kruskal-Wallis, test estacional ANOVA).
