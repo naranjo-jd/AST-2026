@@ -341,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-8"><a href="cap:analisis.html#cb9-8" tabindex="-1"></a></span>
 <span id="cb9-9"><a href="cap:analisis.html#cb9-9" tabindex="-1"></a><span class="co"># Calcular matriz de correlaciones</span></span>
 <span id="cb9-10"><a href="cap:analisis.html#cb9-10" tabindex="-1"></a>lag_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;valor&quot;</span>, <span class="st">&quot;lag_1&quot;</span>, <span class="st">&quot;lag_7&quot;</span>, <span class="st">&quot;lag_30&quot;</span>)</span>
-<span id="cb9-11"><a href="cap:analisis.html#cb9-11" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(datos[, lag_cols], <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb9-11"><a href="cap:analisis.html#cb9-11" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">as.matrix</span>(datos[, lag_cols]), <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
 <span id="cb9-12"><a href="cap:analisis.html#cb9-12" tabindex="-1"></a></span>
 <span id="cb9-13"><a href="cap:analisis.html#cb9-13" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
 <span id="cb9-14"><a href="cap:analisis.html#cb9-14" tabindex="-1"></a>  corr_matrix,</span>
