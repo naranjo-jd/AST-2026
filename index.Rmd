@@ -1,0 +1,11 @@
+---
+title: "Bookdown Project"
+author: "Juan"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+---
+
+# Preface {-}
+
+This is a starter Bookdown repository.

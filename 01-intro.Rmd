@@ -1,0 +1,7 @@
+# Introduction
+
+Welcome to your Bookdown project.
+
+## Why Bookdown?
+
+Bookdown lets you write long-form documents with chapters, cross-references, and multiple output formats.
