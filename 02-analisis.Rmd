@@ -128,7 +128,7 @@ datos <- datos %>%
 
 # Calcular matriz de correlaciones
 lag_cols <- c("valor", "lag_1", "lag_7", "lag_30")
-corr_matrix <- cor(datos[, lag_cols], use = "complete.obs")
+corr_matrix <- cor(as.matrix(datos[, lag_cols]), use = "complete.obs")
 
 knitr::kable(
   corr_matrix,
